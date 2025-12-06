@@ -47,7 +47,8 @@ Thanks for your work [Siddhartha Varma](https://github.com/BRO3886).
 
 ## Limitations
 
-:warning: the only limitation is that it can not be used on empty repositories.
+:warning: it cannot be used on empty repositories. \
+:warning: parallel commits on the same file lead to a race condition where previous changes are overwritten.
 
 ## What's new
 
@@ -80,6 +81,9 @@ Thanks for your work [Siddhartha Varma](https://github.com/BRO3886).
     # Example: src/main.mjs,src/main.spec.js
     # If not set all staged files are considered for commit.
     files: ''
+
+    # In case you want to tag your commit, just pass a tag reference and this action will do the work for you.
+    tag: ''
 ```
 
 <!-- end usage -->

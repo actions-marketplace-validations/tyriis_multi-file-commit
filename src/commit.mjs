@@ -23,7 +23,7 @@ const debug = process.env.NODE_LOG_LEVEL === 'debug'
 // const octokit = new Octokit({ auth: GITHUB_TOKEN })
 
 // TOKEN AUTH tested with APP TOKEN and PAT
-export const commit = async (config, files, message) => {
+export const commit = async (config, files, message, tag) => {
   const octokit = new Octokit({ auth: config.token || process.env.GITHUB_TOKEN })
   const owner = config.owner
   const repo = config.repo
@@ -125,6 +125,21 @@ export const commit = async (config, files, message) => {
   })
   if (debug) {
     echo`${JSON.stringify(updateResponse.data, null, 2)}`
+  }
+
+  if (tag) {
+    // Update Reference
+    // https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#update-a-reference
+    const updateTagResponse = await octokit.request('POST /repos/{owner}/{repo}/git/refs', {
+      sha: commitResponse.data.sha,
+      owner,
+      ref: `refs/tags/${tag}`,
+      repo,
+      headers,
+    })
+    if (debug) {
+      echo`${JSON.stringify(updateTagResponse.data, null, 2)}`
+    }
   }
   return updateResponse.data
 }
