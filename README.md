@@ -53,13 +53,15 @@ Thanks for your work [Siddhartha Varma](https://github.com/BRO3886).
 ## What's new
 
 - First implementation is currently tested
+- Runtime upgraded to Node 24 (GitHub Action runtime and package engine)
+- `zx` upgraded to latest major (8.x)
 
 ## Usage
 
 <!-- start usage -->
 
 ```yaml
-- uses: tyriis/multi-file-commit@v0.1.0
+- uses: tyriis/multi-file-commit@v1.0.0
   with:
     # Repository name with owner. For example, actions/checkout
     # Default: ${{ github.repository }}
